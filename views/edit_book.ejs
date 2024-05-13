@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edytuj Książkę</title>
+</head>
+<body>
+    <h1>Edytuj Książkę</h1>
+    <form action="/books/edit/<%= book._id %>" method="post">
+        <label for="title">Tytuł:</label>
+        <input type="text" id="title" name="title" value="<%= book.title %>" required><br>
+        
+        <label for="author">Autor:</label>
+        <select id="author" name="author">
+            <% authors.forEach(author => { %>
+                <option value="<%= author._id %>" <%= author._id.equals(book.author._id) ? 'selected' : '' %>><%= author.name %></option>
+            <% }) %>
+        </select><br>
+
+        <button type="submit">Zapisz zmiany</button>
+    </form>
+    <a href="/books">Powrót do listy książek</a>
+</body>
+</html>

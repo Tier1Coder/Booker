@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarządzaj Autorami</title>
+</head>
+<body>
+    <h1>Autorzy</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Imię i Nazwisko</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% authors.forEach(function(author) { %>
+                <tr>
+                    <td><%= author.name %></td>
+                    <td>
+                        <a href="/authors/edit/<%= author._id %>">Edytuj</a>
+                        <a href="/authors/delete/<%= author._id %>">Usuń</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <h2>Dodaj nowego autora</h2>
+    <form action="/authors/add" method="post">
+        <label for="name">Imię i Nazwisko:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Dodaj</button>
+    </form>
+    <a href="/">Powrót do strony głównej</a>
+</body>
+</html>

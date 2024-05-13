@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarządzaj Książkami</title>
+</head>
+<body>
+    <h1>Książki</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% books.forEach(function(book) { %>
+                <tr>
+                    <td><%= book.title %></td>
+                    <td><%= book.author.name %></td>
+                    <td>
+                        <a href="/books/edit/<%= book._id %>">Edytuj</a>
+                        <a href="/books/delete/<%= book._id %>">Usuń</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <h2>Dodaj nową książkę</h2>
+    <form action="/books/add" method="post">
+        <label for="title">Tytuł:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="author">Autor:</label>
+        <select id="author" name="author">
+            <% authors.forEach(function(author) { %>
+                <option value="<%= author._id %>"><%= author.name %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Dodaj</button>
+    </form>
+    <a href="/">Powrót do strony głównej</a>
+</body>
+</html>
