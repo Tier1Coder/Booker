@@ -1,5 +1,7 @@
-import Author from '../models/Author';
+import Author from '../models/Author.js';
 import express from 'express';
+import Book from '../models/Book.js';  
+
 
 
 const router = express.Router();
@@ -181,8 +183,14 @@ router.put('/api/authors/:id', async (req, res) => {
  */
 
 router.delete('/api/authors/:id', async (req, res) => {
+    const authorId = req.params.id;
+    const books = await Book.find({ author: authorId });
+    if (books.length > 0) {
+        return res.status(400).send('Cannot delete author with books assigned.');
+    }
+
     try {
-        const deletedAuthor = await Author.findByIdAndDelete(req.params.id);
+        const deletedAuthor = await Author.findByIdAndDelete(authorId);
         if (deletedAuthor) {
             res.json(deletedAuthor);
         } else {

@@ -1,17 +1,39 @@
+/*
+
+Prerequisites:
+1) Install Node.js and npm
+2) Install MongoDB
+3) Run MongoDB on: localhost:27017
+4) Install required modules: npm install
+
+
+
+To run this application, in terminal, write: npm start.
+
+*/
+
+
 import express from 'express';
 import mongoose from 'mongoose';
+
+// GraphQL
 import { ApolloServer } from 'apollo-server-express';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
-import resolvers from './resolvers';
-import booksRouter from './routes/books';
-import authorsRouter from './routes/authors';
-import apiBooksRouter from './routes/apiBooks';
-import apiAuthorsRouter from './routes/apiAuthors';
+
+// Swagger
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import swaggerOptions from './swaggerConfig';
+
+// local
+import swaggerOptions from './swaggerConfig.js';
+import resolvers from './resolvers.js';
+import booksRouter from './routes/books.js';
+import authorsRouter from './routes/authors.js';
+import apiBooksRouter from './routes/apiBooks.js';
+import apiAuthorsRouter from './routes/apiAuthors.js';
+
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
@@ -23,9 +45,14 @@ const schemaWithResolvers = addResolversToSchema({
 });
 
 const app = express();
+
 app.set('view engine', 'ejs');
+
+const cors = require('cors');
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(express.json())
 
 const server = new ApolloServer({ schema: schemaWithResolvers });
 
