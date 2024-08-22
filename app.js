@@ -64,7 +64,6 @@ async function startServer() {
 startServer();
 
 
-// Trasa główna
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -76,12 +75,10 @@ app.use('/', apiBooksRouter);
 app.use('/', apiAuthorsRouter);
 
 
-
-// Połączenie z MongoDB
+// Establishing connection with MongoDB
 mongoose.connect('mongodb://localhost:27017/bookerDB', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
     app.listen(3000, () => console.log('Server is running on http://localhost:3000'));
 }).catch(err => console.log(err));
-
