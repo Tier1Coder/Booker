@@ -14,4 +14,3 @@
 - **Express.js**: Web framework for Node.js.
 - **MongoDB**: NoSQL database for storing user and booking data.
 - **EJS**: Templating engine used for rendering views.
-- **CSS/HTML**: Frontend design.
