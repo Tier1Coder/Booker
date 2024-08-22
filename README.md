@@ -5,5 +5,5 @@
 ## Technologies Used
 - **Node.js**: JavaScript runtime environment.
 - **Express.js**: Web framework for Node.js.
-- **MongoDB**: NoSQL database for storing user and booking data.
+- **MongoDB**: NoSQL database for storing authors and books data.
 - **EJS**: Templating engine used for rendering views.
